@@ -6,9 +6,7 @@
       "camelcase": "Geno",
       "title": "Geno",
       "scope": "source.geno",
-      "file-types": [
-        "geno"
-      ],
+      "file-types": ["geno"],
       "injection-regex": "^geno$",
       "class-name": "TreeSitterGeno"
     }
@@ -16,7 +14,7 @@
   "metadata": {
     "version": "0.1.0",
     "license": "MIT",
-    "description": "Geno intermediate structure language",
+    "description": "Geno schema language",
     "authors": [
       {
         "name": "John Lyon-Smith",
@@ -25,7 +23,7 @@
       }
     ],
     "links": {
-      "repository": "https://github.com/tree-sitter/tree-sitter-geno",
+      "repository": "https://github.com/jlyonsmith/tree-sitter-geno",
       "funding": ""
     }
   },
