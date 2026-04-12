@@ -1,10 +1,11 @@
-meta {
-    format = 1,
-}
+#![format = 1]
 
 // Everything that Geno can do
+#[noCodeGen]
+include "other.geno"
 
 // Fruits
+#[someFlag]
 enum Enum1: i16 {
   none = -1,
   apple = 1,
@@ -16,7 +17,6 @@ enum Enum1: i16 {
 // Everything
 struct Type1 {
 	alpha: i8,
-	alpha_beta: u8,
 	alphaBeta: i16,
 	a4: u16,
 	a5: i32,
@@ -24,6 +24,7 @@ struct Type1 {
 	a7: i64,
 	a8: u64,
 	a9: f32,
+    #[default = 10]
 	a10: f64,
 	n1: i8?,
 	n2: u8?,
@@ -35,6 +36,7 @@ struct Type1 {
 	n8: u32?,
 	n9: i64?,
 	n10: u64?,
+	#[type = "PathBuf"]
 	s1: string,
 	s2: string?,
 	b1: bool,
@@ -48,6 +50,5 @@ struct Type1 {
 	m1: { i32 : f64 },
 	m2: { string : string },
 	m3: { string : bool },
-	t1: Type1, // Nested type
-	t2: Type1?,
+	t1: Type1?, // Nested type
 }

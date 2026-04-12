@@ -8,18 +8,18 @@
       "members": [
         {
           "type": "SYMBOL",
-          "name": "meta_decl"
+          "name": "schema_attr_decl"
         },
         {
           "type": "REPEAT",
           "content": {
             "type": "SYMBOL",
-            "name": "_declaration"
+            "name": "_element"
           }
         }
       ]
     },
-    "_declaration": {
+    "_element": {
       "type": "CHOICE",
       "members": [
         {
@@ -29,36 +29,53 @@
         {
           "type": "SYMBOL",
           "name": "enum_decl"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "include"
         }
       ]
     },
-    "meta_decl": {
+    "schema_attr_decl": {
       "type": "SEQ",
       "members": [
         {
           "type": "STRING",
-          "value": "meta"
-        },
-        {
-          "type": "STRING",
-          "value": "{"
+          "value": "#!["
         },
         {
           "type": "SYMBOL",
-          "name": "meta_data_list"
+          "name": "attr_data_list"
         },
         {
           "type": "STRING",
-          "value": "}"
+          "value": "]"
         }
       ]
     },
-    "meta_data_list": {
+    "attr_decl": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "STRING",
+          "value": "#["
+        },
+        {
+          "type": "SYMBOL",
+          "name": "attr_data_list"
+        },
+        {
+          "type": "STRING",
+          "value": "]"
+        }
+      ]
+    },
+    "attr_data_list": {
       "type": "SEQ",
       "members": [
         {
           "type": "SYMBOL",
-          "name": "meta_data_entry"
+          "name": "attr_data_entry"
         },
         {
           "type": "REPEAT",
@@ -71,7 +88,7 @@
               },
               {
                 "type": "SYMBOL",
-                "name": "meta_data_entry"
+                "name": "attr_data_entry"
               }
             ]
           }
@@ -90,7 +107,7 @@
         }
       ]
     },
-    "meta_data_entry": {
+    "attr_data_entry": {
       "type": "SEQ",
       "members": [
         {
@@ -98,27 +115,77 @@
           "name": "identifier"
         },
         {
-          "type": "STRING",
-          "value": "="
-        },
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "SEQ",
+              "members": [
+                {
+                  "type": "STRING",
+                  "value": "="
+                },
+                {
+                  "type": "CHOICE",
+                  "members": [
+                    {
+                      "type": "SYMBOL",
+                      "name": "string_literal"
+                    },
+                    {
+                      "type": "SYMBOL",
+                      "name": "integer_literal"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "BLANK"
+            }
+          ]
+        }
+      ]
+    },
+    "include": {
+      "type": "SEQ",
+      "members": [
         {
           "type": "CHOICE",
           "members": [
             {
               "type": "SYMBOL",
-              "name": "string_literal"
+              "name": "attr_decl"
             },
             {
-              "type": "SYMBOL",
-              "name": "integer_literal"
+              "type": "BLANK"
             }
           ]
+        },
+        {
+          "type": "STRING",
+          "value": "include"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "string_literal"
         }
       ]
     },
     "enum_decl": {
       "type": "SEQ",
       "members": [
+        {
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "SYMBOL",
+              "name": "attr_decl"
+            },
+            {
+              "type": "BLANK"
+            }
+          ]
+        },
         {
           "type": "STRING",
           "value": "enum"
@@ -203,6 +270,18 @@
       "type": "SEQ",
       "members": [
         {
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "SYMBOL",
+              "name": "attr_decl"
+            },
+            {
+              "type": "BLANK"
+            }
+          ]
+        },
+        {
           "type": "SYMBOL",
           "name": "identifier"
         },
@@ -281,6 +360,18 @@
     "struct_field": {
       "type": "SEQ",
       "members": [
+        {
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "SYMBOL",
+              "name": "attr_decl"
+            },
+            {
+              "type": "BLANK"
+            }
+          ]
+        },
         {
           "type": "SYMBOL",
           "name": "identifier"
@@ -485,7 +576,7 @@
     },
     "identifier": {
       "type": "PATTERN",
-      "value": "[a-zA-Z][a-zA-Z0-9_]*"
+      "value": "[a-zA-Z][a-zA-Z0-9]*"
     },
     "comment": {
       "type": "PATTERN",

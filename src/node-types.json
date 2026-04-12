@@ -19,6 +19,59 @@
     }
   },
   {
+    "type": "attr_data_entry",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "identifier",
+          "named": true
+        },
+        {
+          "type": "integer_literal",
+          "named": true
+        },
+        {
+          "type": "string_literal",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "attr_data_list",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "attr_data_entry",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "attr_decl",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": true,
+      "types": [
+        {
+          "type": "attr_data_list",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
     "type": "builtin_type",
     "named": true,
     "fields": {},
@@ -54,6 +107,10 @@
       "required": true,
       "types": [
         {
+          "type": "attr_decl",
+          "named": true
+        },
+        {
           "type": "enum_variant_list",
           "named": true
         },
@@ -76,6 +133,10 @@
       "multiple": true,
       "required": true,
       "types": [
+        {
+          "type": "attr_decl",
+          "named": true
+        },
         {
           "type": "identifier",
           "named": true
@@ -135,6 +196,25 @@
     "fields": {}
   },
   {
+    "type": "include",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "attr_decl",
+          "named": true
+        },
+        {
+          "type": "string_literal",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
     "type": "integer_type",
     "named": true,
     "fields": {}
@@ -159,59 +239,6 @@
     }
   },
   {
-    "type": "meta_data_entry",
-    "named": true,
-    "fields": {},
-    "children": {
-      "multiple": true,
-      "required": true,
-      "types": [
-        {
-          "type": "identifier",
-          "named": true
-        },
-        {
-          "type": "integer_literal",
-          "named": true
-        },
-        {
-          "type": "string_literal",
-          "named": true
-        }
-      ]
-    }
-  },
-  {
-    "type": "meta_data_list",
-    "named": true,
-    "fields": {},
-    "children": {
-      "multiple": true,
-      "required": true,
-      "types": [
-        {
-          "type": "meta_data_entry",
-          "named": true
-        }
-      ]
-    }
-  },
-  {
-    "type": "meta_decl",
-    "named": true,
-    "fields": {},
-    "children": {
-      "multiple": false,
-      "required": true,
-      "types": [
-        {
-          "type": "meta_data_list",
-          "named": true
-        }
-      ]
-    }
-  },
-  {
     "type": "schema",
     "named": true,
     "root": true,
@@ -225,11 +252,30 @@
           "named": true
         },
         {
-          "type": "meta_decl",
+          "type": "include",
+          "named": true
+        },
+        {
+          "type": "schema_attr_decl",
           "named": true
         },
         {
           "type": "struct_decl",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "schema_attr_decl",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": true,
+      "types": [
+        {
+          "type": "attr_data_list",
           "named": true
         }
       ]
@@ -263,6 +309,10 @@
       "required": true,
       "types": [
         {
+          "type": "attr_decl",
+          "named": true
+        },
+        {
           "type": "field_type",
           "named": true
         },
@@ -287,6 +337,14 @@
         }
       ]
     }
+  },
+  {
+    "type": "#![",
+    "named": false
+  },
+  {
+    "type": "#[",
+    "named": false
   },
   {
     "type": ",",
@@ -358,12 +416,12 @@
     "named": true
   },
   {
-    "type": "integer_literal",
-    "named": true
+    "type": "include",
+    "named": false
   },
   {
-    "type": "meta",
-    "named": false
+    "type": "integer_literal",
+    "named": true
   },
   {
     "type": "string_literal",

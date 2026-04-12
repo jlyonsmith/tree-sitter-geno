@@ -1,5 +1,5 @@
 /**
- * @file Geno intermediate structure language
+ * @file Geno universal structure language
  * @author John Lyon-Smith <john@escapegallery.net>
  * @license MIT
  */
@@ -18,22 +18,29 @@ export default grammar({
   word: ($) => $.identifier,
 
   rules: {
-    schema: ($) => seq($.meta_decl, repeat($._declaration)),
+    schema: ($) => seq($.schema_attr_decl, repeat($._element)),
 
-    _declaration: ($) => choice($.struct_decl, $.enum_decl),
+    _element: ($) => choice($.struct_decl, $.enum_decl, $.include),
 
-    meta_decl: ($) => seq("meta", "{", $.meta_data_list, "}"),
-    meta_data_list: ($) =>
+    schema_attr_decl: ($) => seq("#![", $.attr_data_list, "]"),
+    attr_decl: ($) => seq("#[", $.attr_data_list, "]"),
+    attr_data_list: ($) =>
       seq(
-        $.meta_data_entry,
-        repeat(seq(",", $.meta_data_entry)),
+        $.attr_data_entry,
+        repeat(seq(",", $.attr_data_entry)),
         optional(","),
       ),
-    meta_data_entry: ($) =>
-      seq($.identifier, "=", choice($.string_literal, $.integer_literal)),
+    attr_data_entry: ($) =>
+      seq(
+        $.identifier,
+        optional(seq("=", choice($.string_literal, $.integer_literal))),
+      ),
+
+    include: ($) => seq(optional($.attr_decl), "include", $.string_literal),
 
     enum_decl: ($) =>
       seq(
+        optional($.attr_decl),
         "enum",
         $.identifier,
         optional(seq(":", $.integer_type)),
@@ -43,13 +50,15 @@ export default grammar({
       ),
     enum_variant_list: ($) =>
       seq($.enum_variant, repeat(seq(",", $.enum_variant)), optional(",")),
-    enum_variant: ($) => seq($.identifier, "=", $.integer_literal),
+    enum_variant: ($) =>
+      seq(optional($.attr_decl), $.identifier, "=", $.integer_literal),
 
     struct_decl: ($) =>
       seq("struct", $.identifier, "{", $.struct_field_list, "}"),
     struct_field_list: ($) =>
       seq($.struct_field, repeat(seq(",", $.struct_field)), optional(",")),
-    struct_field: ($) => seq($.identifier, ":", $.field_type),
+    struct_field: ($) =>
+      seq(optional($.attr_decl), $.identifier, ":", $.field_type),
 
     field_type: ($) =>
       seq(
@@ -71,8 +80,8 @@ export default grammar({
     string_literal: (_) => /"([^"\\]|\\.)*"/,
     integer_literal: (_) => /-?\d+/,
 
-    identifier: (_) => /[a-zA-Z][a-zA-Z0-9_]*/,
+    identifier: (_) => /[a-zA-Z][a-zA-Z0-9]*/,
 
-    comment: ($) => /\/\/[^\r\n]*/,
+    comment: (_) => /\/\/[^\r\n]*/,
   },
 });
