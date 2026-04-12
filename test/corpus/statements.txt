@@ -2,25 +2,25 @@
 Everything
 ==================
 
-meta {
-    format = 1,
-}
+#![format = 1]
 
 // Everything that Geno can do
+#[noCodeGen]
+include "other.geno"
 
 // Fruits
+#[someFlag]
 enum Enum1: i16 {
-    none = -1,
-    apple = 1,
-    orange = 2,
-    kiwiFruit = 3,
-    pear = 4,
+  none = -1,
+  apple = 1,
+  orange = 2,
+  kiwiFruit = 3,
+  pear = 4,
 }
 
 // Everything
 struct Type1 {
 	alpha: i8,
-	alpha_beta: u8,
 	alphaBeta: i16,
 	a4: u16,
 	a5: i32,
@@ -28,6 +28,7 @@ struct Type1 {
 	a7: i64,
 	a8: u64,
 	a9: f32,
+  #[default = 10]
 	a10: f64,
 	n1: i8?,
 	n2: u8?,
@@ -39,6 +40,7 @@ struct Type1 {
 	n8: u32?,
 	n9: i64?,
 	n10: u64?,
+	#[type = "PathBuf"]
 	s1: string,
 	s2: string?,
 	b1: bool,
@@ -52,21 +54,30 @@ struct Type1 {
 	m1: { i32 : f64 },
 	m2: { string : string },
 	m3: { string : bool },
-	t1: Type1, // Nested type
-	t2: Type1?,
+	t1: Type1?, // Nested type
 }
 
 ---
 
 (schema
-  (meta_decl
-    (meta_data_list
-      (meta_data_entry
+  (schema_attr_decl
+    (attr_data_list
+      (attr_data_entry
         (identifier)
         (integer_literal))))
   (comment)
+  (include
+    (attr_decl
+      (attr_data_list
+        (attr_data_entry
+          (identifier))))
+    (string_literal))
   (comment)
   (enum_decl
+    (attr_decl
+      (attr_data_list
+        (attr_data_entry
+          (identifier))))
     (identifier)
     (integer_type)
     (enum_variant_list
@@ -128,8 +139,13 @@ struct Type1 {
         (identifier)
         (field_type
           (builtin_type
-            (integer_type))))
+            (float_type))))
       (struct_field
+        (attr_decl
+          (attr_data_list
+            (attr_data_entry
+              (identifier)
+              (integer_literal))))
         (identifier)
         (field_type
           (builtin_type
@@ -138,11 +154,6 @@ struct Type1 {
         (identifier)
         (field_type
           (builtin_type
-            (float_type))))
-      (struct_field
-        (identifier)
-        (field_type
-          (builtin_type
             (integer_type))))
       (struct_field
         (identifier)
@@ -190,6 +201,11 @@ struct Type1 {
           (builtin_type
             (integer_type))))
       (struct_field
+        (attr_decl
+          (attr_data_list
+            (attr_data_entry
+              (identifier)
+              (string_literal))))
         (identifier)
         (field_type
           (builtin_type
@@ -277,9 +293,5 @@ struct Type1 {
       (struct_field
         (identifier)
         (field_type
-          (identifier)))
-      (comment)
-      (struct_field
-        (identifier)
-        (field_type
-          (identifier))))))
+          (identifier))))
+    (comment)))
