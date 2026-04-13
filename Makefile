@@ -1,6 +1,6 @@
 LANGUAGE_NAME := tree-sitter-geno
 HOMEPAGE_URL := https://github.com/tree-sitter/tree-sitter-geno
-VERSION := 0.1.0
+VERSION := 0.3.0
 
 # repository
 SRC_DIR := src

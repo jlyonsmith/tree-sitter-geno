@@ -1,7 +1,7 @@
 [package]
 name = "tree-sitter-geno"
 description = "Geno intermediate structure language"
-version = "0.1.0"
+version = "0.3.0"
 authors = ["John Lyon-Smith <john@escapegallery.net>"]
 license = "MIT"
 readme = "README.md"
