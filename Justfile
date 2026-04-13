@@ -108,9 +108,9 @@ release OPERATION:
   info "Finished release of '"$name"' on branch '"$branch"'. You can publish the crate."
   exit 0
 
-del-tag:
+del-tag TAG:
   #!/usr/bin/env fish
-  set tagName (cat "scratch/version.tag.txt")
+  set tagName {{TAG}}
 
   git tag -d $tagName
   git push origin --delete $tagName
