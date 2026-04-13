@@ -1,0 +1,80 @@
+{
+  vars: {
+    major: 0,
+    minor: 2,
+    patch: 0,
+    build: 3,
+    tz: "America/Los_Angeles",
+  },
+  calcVars: {
+    nextBuild: "build + 1",
+  },
+  operations: {
+    incrMajor: "major += 1; minor = 0; patch = 0; build = nextBuild",
+    incrMinor: "minor += 1; patch = 0; build = nextBuild",
+    incrPatch: "patch += 1; build = nextBuild",
+    incrBuild: "build = nextBuild",
+  },
+  targets: [
+    {
+      description: "Cargo Package",
+      files: ["Cargo.toml"],
+      updates: [
+        {
+          search: '^(?P<begin>version\\s*=\\s*")\\d+\\.\\d+\\.\\d+(?P<end>"\\s*)$',
+          replace: 'begin + str::from(major) + "." + str::from(minor) + "." + str::from(patch) + end',
+        },
+      ],
+    },
+    {
+      description: "Package.json",
+      files: ["package.json"],
+      updates: [
+        {
+          search: '(?P<begin>"version":\\s*")\\d+\\.\\d+\\.\\d+(?P<end>"\\s*,)',
+          replace: 'begin + str::from(major) + "." + str::from(minor) + "." + str::from(patch) + end',
+        },
+      ],
+    },
+    {
+      description: "Python Project",
+      files: ["pyproject.toml"],
+      updates: [
+        {
+          search: '(?P<begin>version\\s*=\\s*")\\d+\\.\\d+\\.\\d+(?P<end>"\\s*$)',
+          replace: 'begin + str::from(major) + "." + str::from(minor) + "." + str::from(patch) + end',
+        },
+      ],
+    },
+    {
+      description: "CMake",
+      files: ["CMakeLists.txt"],
+      updates: [
+        {
+          search: '(?P<begin>VERSION\\s+")\\d+\\.\\d+\\.\\d+(?P<end>"\\s*$)',
+          replace: 'begin + str::from(major) + "." + str::from(minor) + "." + str::from(patch) + end',
+        },
+      ],
+    },
+    {
+      description: "Make",
+      files: ["Makefile"],
+      updates: [
+        {
+          search: '(?P<begin>VERSION\\s*:=\\s*)\\d+\\.\\d+\\.\\d+(?P<end>\\s*$)',
+          replace: 'begin + str::from(major) + "." + str::from(minor) + "." + str::from(patch) + end',
+        },
+      ],
+    },
+    {
+      description: "Git Tag Name",
+      files: ["scratch/version.tag.txt"],
+      write: '"v" + str::from(major) + "." + str::from(minor) + "." + str::from(patch)',
+    },
+    {
+      description: "Git Tag Description",
+      files: ["scratch/version.desc.txt"],
+      write: '"Version v" + str::from(major) + "." + str::from(minor) + "." + str::from(patch) + "+" + str::from(build)',
+    },
+  ],
+}
