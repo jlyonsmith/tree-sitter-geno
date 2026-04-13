@@ -1,7 +1,7 @@
 cmake_minimum_required(VERSION 3.13)
 
 project(tree-sitter-geno
-        VERSION "0.3.0"
+        VERSION "0.2.0"
         DESCRIPTION "Geno intermediate structure language"
         HOMEPAGE_URL "https://github.com/tree-sitter/tree-sitter-geno"
         LANGUAGES C)
