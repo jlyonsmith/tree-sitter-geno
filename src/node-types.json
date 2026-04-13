@@ -101,7 +101,18 @@
   {
     "type": "enum_decl",
     "named": true,
-    "fields": {},
+    "fields": {
+      "name": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "identifier",
+            "named": true
+          }
+        ]
+      }
+    },
     "children": {
       "multiple": true,
       "required": true,
@@ -112,10 +123,6 @@
         },
         {
           "type": "enum_variant_list",
-          "named": true
-        },
-        {
-          "type": "identifier",
           "named": true
         },
         {
@@ -284,15 +291,22 @@
   {
     "type": "struct_decl",
     "named": true,
-    "fields": {},
+    "fields": {
+      "name": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "identifier",
+            "named": true
+          }
+        ]
+      }
+    },
     "children": {
-      "multiple": true,
+      "multiple": false,
       "required": true,
       "types": [
-        {
-          "type": "identifier",
-          "named": true
-        },
         {
           "type": "struct_field_list",
           "named": true
@@ -303,7 +317,18 @@
   {
     "type": "struct_field",
     "named": true,
-    "fields": {},
+    "fields": {
+      "name": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "identifier",
+            "named": true
+          }
+        ]
+      }
+    },
     "children": {
       "multiple": true,
       "required": true,
@@ -314,10 +339,6 @@
         },
         {
           "type": "field_type",
-          "named": true
-        },
-        {
-          "type": "identifier",
           "named": true
         }
       ]

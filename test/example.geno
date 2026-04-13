@@ -24,7 +24,7 @@ struct Type1 {
 	a7: i64,
 	a8: u64,
 	a9: f32,
-    #[default = 10]
+  #[default = 10]
 	a10: f64,
 	n1: i8?,
 	n2: u8?,
