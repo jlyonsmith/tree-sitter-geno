@@ -304,9 +304,13 @@
       }
     },
     "children": {
-      "multiple": false,
+      "multiple": true,
       "required": true,
       "types": [
+        {
+          "type": "attr_decl",
+          "named": true
+        },
         {
           "type": "struct_field_list",
           "named": true
