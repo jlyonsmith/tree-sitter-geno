@@ -15,6 +15,7 @@ enum Enum1: i16 {
 }
 
 // Everything
+#[name = "TestType1"]
 struct Type1 {
 	alpha: i8,
 	alphaBeta: i16,

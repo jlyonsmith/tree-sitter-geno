@@ -7,9 +7,6 @@
 /// <reference types="tree-sitter-cli/dsl" />
 // @ts-check
 
-const numericTypes = ["i8", "i16", "i32", "i64", "u8", "u16", "u32", "u64"];
-const floatTypes = ["f32", "f64"];
-
 export default grammar({
   name: "geno",
 
@@ -57,7 +54,14 @@ export default grammar({
       seq(optional($.attr_decl), $.identifier, "=", $.integer_literal),
 
     struct_decl: ($) =>
-      seq("struct", field("name", $.identifier), "{", $.struct_field_list, "}"),
+      seq(
+        optional($.attr_decl),
+        "struct",
+        field("name", $.identifier),
+        "{",
+        $.struct_field_list,
+        "}",
+      ),
     struct_field_list: ($) =>
       seq($.struct_field, repeat(seq(",", $.struct_field)), optional(",")),
     struct_field: ($) =>

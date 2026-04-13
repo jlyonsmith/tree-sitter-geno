@@ -19,6 +19,7 @@ enum Enum1: i16 {
 }
 
 // Everything
+#[name = "TestType1"]
 struct Type1 {
 	alpha: i8,
 	alphaBeta: i16,
@@ -78,7 +79,7 @@ struct Type1 {
       (attr_data_list
         (attr_data_entry
           (identifier))))
-    (identifier)
+    name: (identifier)
     (integer_type)
     (enum_variant_list
       (enum_variant
@@ -98,45 +99,50 @@ struct Type1 {
         (integer_literal))))
   (comment)
   (struct_decl
-    (identifier)
+    (attr_decl
+      (attr_data_list
+        (attr_data_entry
+          (identifier)
+          (string_literal))))
+    name: (identifier)
     (struct_field_list
       (struct_field
-        (identifier)
+        name: (identifier)
         (field_type
           (builtin_type
             (integer_type))))
       (struct_field
-        (identifier)
+        name: (identifier)
         (field_type
           (builtin_type
             (integer_type))))
       (struct_field
-        (identifier)
+        name: (identifier)
         (field_type
           (builtin_type
             (integer_type))))
       (struct_field
-        (identifier)
+        name: (identifier)
         (field_type
           (builtin_type
             (integer_type))))
       (struct_field
-        (identifier)
+        name: (identifier)
         (field_type
           (builtin_type
             (integer_type))))
       (struct_field
-        (identifier)
+        name: (identifier)
         (field_type
           (builtin_type
             (integer_type))))
       (struct_field
-        (identifier)
+        name: (identifier)
         (field_type
           (builtin_type
             (integer_type))))
       (struct_field
-        (identifier)
+        name: (identifier)
         (field_type
           (builtin_type
             (float_type))))
@@ -146,57 +152,57 @@ struct Type1 {
             (attr_data_entry
               (identifier)
               (integer_literal))))
-        (identifier)
+        name: (identifier)
         (field_type
           (builtin_type
             (float_type))))
       (struct_field
-        (identifier)
+        name: (identifier)
         (field_type
           (builtin_type
             (integer_type))))
       (struct_field
-        (identifier)
+        name: (identifier)
         (field_type
           (builtin_type
             (integer_type))))
       (struct_field
-        (identifier)
+        name: (identifier)
         (field_type
           (builtin_type
             (integer_type))))
       (struct_field
-        (identifier)
+        name: (identifier)
         (field_type
           (builtin_type
             (integer_type))))
       (struct_field
-        (identifier)
+        name: (identifier)
         (field_type
           (builtin_type
             (integer_type))))
       (struct_field
-        (identifier)
+        name: (identifier)
         (field_type
           (builtin_type
             (integer_type))))
       (struct_field
-        (identifier)
+        name: (identifier)
         (field_type
           (builtin_type
             (integer_type))))
       (struct_field
-        (identifier)
+        name: (identifier)
         (field_type
           (builtin_type
             (integer_type))))
       (struct_field
-        (identifier)
+        name: (identifier)
         (field_type
           (builtin_type
             (integer_type))))
       (struct_field
-        (identifier)
+        name: (identifier)
         (field_type
           (builtin_type
             (integer_type))))
@@ -206,49 +212,49 @@ struct Type1 {
             (attr_data_entry
               (identifier)
               (string_literal))))
-        (identifier)
+        name: (identifier)
         (field_type
           (builtin_type
             (string_type))))
       (struct_field
-        (identifier)
+        name: (identifier)
         (field_type
           (builtin_type
             (string_type))))
       (struct_field
-        (identifier)
+        name: (identifier)
         (field_type
           (builtin_type
             (bool_type))))
       (struct_field
-        (identifier)
+        name: (identifier)
         (field_type
           (builtin_type
             (bool_type))))
       (struct_field
-        (identifier)
+        name: (identifier)
         (field_type
           (identifier)))
       (struct_field
-        (identifier)
+        name: (identifier)
         (field_type
           (identifier)))
       (struct_field
-        (identifier)
+        name: (identifier)
         (field_type
           (array_type
             (field_type
               (builtin_type
                 (string_type))))))
       (struct_field
-        (identifier)
+        name: (identifier)
         (field_type
           (array_type
             (field_type
               (builtin_type
                 (string_type))))))
       (struct_field
-        (identifier)
+        name: (identifier)
         (field_type
           (array_type
             (field_type
@@ -257,14 +263,14 @@ struct Type1 {
             (integer_literal))))
       (comment)
       (struct_field
-        (identifier)
+        name: (identifier)
         (field_type
           (array_type
             (field_type
               (builtin_type
                 (bool_type))))))
       (struct_field
-        (identifier)
+        name: (identifier)
         (field_type
           (map_type
             (builtin_type
@@ -273,7 +279,7 @@ struct Type1 {
               (builtin_type
                 (float_type))))))
       (struct_field
-        (identifier)
+        name: (identifier)
         (field_type
           (map_type
             (builtin_type
@@ -282,7 +288,7 @@ struct Type1 {
               (builtin_type
                 (string_type))))))
       (struct_field
-        (identifier)
+        name: (identifier)
         (field_type
           (map_type
             (builtin_type
@@ -291,7 +297,7 @@ struct Type1 {
               (builtin_type
                 (bool_type))))))
       (struct_field
-        (identifier)
+        name: (identifier)
         (field_type
           (identifier))))
     (comment)))
